@@ -1,0 +1,28 @@
+name: Update LTE Config
+
+on:
+  schedule:
+    - cron: '*/85 * * * *' # Запуск каждые 85 минут
+  workflow_dispatch: # Позволяет запустить вручную кнопкой
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run bot
+        env:
+          GH_TOKEN: ${{ secrets.LTE_TOKEN }}
+          GH_USER: ${{ github.repository_owner }}
+          GH_REPO: "halyava-vpn-lte"
+        run: python lte_bot.py
