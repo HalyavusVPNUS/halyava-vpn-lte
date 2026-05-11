@@ -13,10 +13,10 @@ TOKEN = os.getenv("GH_TOKEN")
 FILE_PATH = "lte.txt"
 
 SOURCE_LTE = "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/refs/heads/main/vpn-lte/subscriptions/1sub.txt"
-MAX_PING = 800 
+# Снижаем планку пинга до 650, чтобы убрать тормозные N/A сервера
+MAX_PING = 650 
 LIMIT_TOTAL = 1000
 
-# Расширенный список для перевода кодов стран
 RU_COUNTRIES = {
     'RU': 'Россия', 'US': 'США', 'DE': 'Германия', 'NL': 'Нидерланды', 'FI': 'Финляндия',
     'TR': 'Турция', 'KZ': 'Казахстан', 'FR': 'Франция', 'GB': 'Великобритания', 'PL': 'Польша',
@@ -27,21 +27,24 @@ RU_COUNTRIES = {
     'CZ': 'Чехия', 'HU': 'Венгрия', 'RO': 'Румыния', 'BG': 'Болгария', 'GR': 'Греция'
 }
 
-def get_ping(host, port, timeout=2.5):
+def get_ping(host, port, timeout=2.0):
     try:
+        # Улучшенная проверка: сначала резолвим IP
         ip = socket.gethostbyname(host)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(timeout)
         start = time.time()
         res = sock.connect_ex((ip, port))
         sock.close()
-        if res == 0: return int((time.time() - start) * 1000)
+        if res == 0:
+            return int((time.time() - start) * 1000)
     except: pass
     return None
 
 def get_country_info(host):
     try:
-        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=3.5)
+        # Используем проверенный API для локации
+        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=3.0)
         data = r.json()
         if data.get('status') == 'success':
             code = data.get('countryCode')
@@ -50,37 +53,61 @@ def get_country_info(host):
     return None, None
 
 def process_key(key):
+    # Чистим ключ от лишних пробелов
+    key = key.strip()
     main_part = key.split('#')[0]
     host_match = re.search(r'@([^:/?#\s]+):?(\d+)?', main_part)
     if not host_match: return None
-    host, port = host_match.group(1), int(host_match.group(2)) if host_match.group(2) else 443
+    
+    host = host_match.group(1)
+    port = int(host_match.group(2)) if host_match.group(2) else 443
+    
+    # Сначала проверяем пинг (самое важное против N/A)
     lat = get_ping(host, port)
     if not lat or lat > MAX_PING: return None
+    
+    # Потом узнаем страну
     code, name = get_country_info(host)
-    if not code: return None # ЗАПРЕТ UNKNOWN
+    if not code: return None 
+    
     emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
     return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat}
 
 def update_repo(content):
     url = f"https://api.github.com/repos/{GITHUB_USER}/{REPO_NAME}/contents/{FILE_PATH}"
     headers = {"Authorization": f"token {TOKEN}", "Accept": "application/vnd.github.v3+json"}
+    
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
+    
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {"message": f"Update LTE: {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
+    data = {
+        "message": f"LTE Update (N/A Fix): {time.strftime('%H:%M:%S')}",
+        "content": encoded_content,
+        "branch": "main"
+    }
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
 def run_once():
     try:
+        # Загружаем источник
         r = requests.get(SOURCE_LTE, timeout=15)
-        tasks = list(set(re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text)))
-        with ThreadPoolExecutor(max_workers=50) as executor:
-            processed = [res for res in list(executor.map(process_key, tasks)) if res]
+        if r.status_code != 200: return
         
+        # Находим все ссылки
+        raw_keys = re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text)
+        tasks = list(set(raw_keys)) # Убираем дубликаты ссылок
+        
+        # Запускаем многопоточную проверку
+        with ThreadPoolExecutor(max_workers=40) as executor:
+            results = list(executor.map(process_key, tasks))
+            
+        processed = [res for res in results if res]
+        
+        # Сортируем: сначала страна, потом лучший пинг
         processed.sort(key=lambda x: (x['name'], x['ping']))
         
-        # Группировка для нумерации
         grouped = {}
         for item in processed:
             n = item['name']
@@ -88,12 +115,13 @@ def run_once():
             grouped[n].append(item)
 
         final_list = []
-        curr = 0
+        count = 0
         for name in sorted(grouped.keys()):
             for idx, item in enumerate(grouped[name], 1):
-                if curr >= LIMIT_TOTAL: break
+                if count >= LIMIT_TOTAL: break
+                # Формируем чистую строку
                 final_list.append(f"{item['main']}#{item['emoji']} {name} LTE #{idx} | @halyava_vpnx")
-                curr += 1
+                count += 1
 
         header = (
             "#profile-title: Халява ВПН | LTE 🏳️\n"
@@ -102,8 +130,12 @@ def run_once():
             "#profile-web-page-url: https://t.me/halyava_vpnx\n"
             f"#announce: Обновлено! Найдено {len(final_list)} мощных конфигов :) @halyava_vpnx\n\n\n"
         )
+        
         update_repo(header + "\n".join(final_list))
-    except: pass
+        print(f"Успешно! Добавлено {len(final_list)} серверов.")
+        
+    except Exception as e:
+        print(f"Ошибка: {e}")
 
 if __name__ == "__main__":
     run_once()
