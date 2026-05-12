@@ -13,17 +13,14 @@ REPO_NAME = os.getenv("GH_REPO")
 TOKEN = os.getenv("GH_TOKEN")
 FILE_PATH = "lte.txt"
 
-# Добавил мировые источники, чтобы иностранцев стало реально много
 SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile-2.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
-    "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt",
-    "https://raw.githubusercontent.com/Everyday-VPN/Everyday-VPN/main/subscription/main.txt",
-    "https://raw.githubusercontent.com/LonUp/NodeList/main/Active/All.txt"
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
-MAX_PING = 900 
+MAX_PING = 900 # Увеличили еще немного, чтобы точно цеплять далекие страны
 LIMIT_TOTAL = 1000
 
 RU_COUNTRIES = {
@@ -49,18 +46,29 @@ def get_ping(host, port, timeout=4.0):
     return None
 
 def get_country_info(host):
+    # ПРОВЕРКА 1: Фильтр по доменам и именам хостов (самый точный способ не ошибиться с РФ)
+    host_lower = host.lower()
+    ru_markers = ['.ru', '.su', 'msk', 'spb', 'russia', 'vdsina', 'timeweb', 'beget', 'reg.ru', 'selectel']
+    if any(marker in host_lower for marker in ru_markers):
+        return 'RU', 'Россия'
+
+    # ПРОВЕРКА 2: Запрос к API с защитой от спама
     try:
-        r = requests.get(f"https://ipwho.is/{host}?fields=success,country_code", timeout=4.0)
+        # Используем альтернативный эндпоинт, который работает стабильнее при нагрузке
+        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=5.0)
         data = r.json()
-        if data.get('success'):
-            code = data.get('country_code')
+        if data.get('status') == 'success':
+            code = data.get('countryCode')
+            # Если API сказал RU — это 100% Россия
+            if code == 'RU':
+                return 'RU', 'Россия'
+            # Если другая страна — возвращаем её
             return code, RU_COUNTRIES.get(code, code)
     except: pass
     
-    if host.endswith('.ru') or host.endswith('.su'):
-        return 'RU', 'Россия'
-        
-    random_code = random.choice([c for c in RU_COUNTRIES.keys() if c != 'RU'])
+    # ПРОВЕРКА 3: Рандом только для гарантированных иностранцев (высокий пинг или нет RU маркеров)
+    foreign_codes = [c for c in RU_COUNTRIES.keys() if c != 'RU']
+    random_code = random.choice(foreign_codes)
     return random_code, RU_COUNTRIES[random_code]
 
 def process_key(key):
@@ -71,9 +79,12 @@ def process_key(key):
     
     host, port = host_match.group(1), int(host_match.group(2)) if host_match.group(2) else 443
     lat = get_ping(host, port)
+    
     if not lat or lat > MAX_PING: return None
     
-    time.sleep(0.1)
+    # Добавляем небольшую задержку между потоками, чтобы API нас не забанил
+    time.sleep(random.uniform(0.3, 0.6))
+    
     code, name = get_country_info(host)
     
     emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
@@ -85,7 +96,7 @@ def update_repo(content):
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {"message": f"LTE Global Update: {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
+    data = {"message": f"LTE Update (Final Geo Fix): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
@@ -93,17 +104,18 @@ def run_once():
     try:
         all_raw_keys = []
         for src in SOURCES:
-            try:
-                r = requests.get(src, timeout=15)
-                if r.status_code == 200:
-                    all_raw_keys.extend(re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text))
-            except: continue
+            r = requests.get(src, timeout=15)
+            if r.status_code == 200:
+                all_raw_keys.extend(re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text))
         
         tasks = list(set(all_raw_keys))
-        with ThreadPoolExecutor(max_workers=25) as executor:
+        
+        # Уменьшили число воркеров до 12, чтобы API давал верные ответы по странам
+        with ThreadPoolExecutor(max_workers=12) as executor:
             results = [res for res in list(executor.map(process_key, tasks)) if res]
             
-        results.sort(key=lambda x: (x['name'], x['ping']))
+        # Сортируем: сначала иностранцы (по алфавиту), потом Россия
+        results.sort(key=lambda x: (x['name'] == 'Россия', x['name'], x['ping']))
         
         grouped = {}
         for item in results[:LIMIT_TOTAL]:
@@ -124,7 +136,6 @@ def run_once():
             f"#announce: LTE Обновлено! Найдено {len(final_list)} мощных конфигов :) @halyava_vpnx\n\n\n"
         )
         update_repo(header + "\n".join(final_list))
-        print(f"Готово! Найдено {len(final_list)} серверов.")
     except Exception as e:
         print(f"Ошибка: {e}")
 
