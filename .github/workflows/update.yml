@@ -2,7 +2,7 @@ name: Update LTE Config
 
 on:
   schedule:
-    - cron: '*/85 * * * *' # Запуск каждые 85 минут
+    - cron: '0 * * * *' # Запуск ровно в начале каждого часа
   workflow_dispatch: # Позволяет запустить вручную кнопкой
 
 jobs:
