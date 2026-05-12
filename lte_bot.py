@@ -12,12 +12,12 @@ REPO_NAME = os.getenv("GH_REPO")
 TOKEN = os.getenv("GH_TOKEN")
 FILE_PATH = "lte.txt"
 
-# Источники (Добавлен новый гист)
+# ИСПРАВЛЕННЫЕ ССЫЛКИ (теперь RAW, чтобы видел все страны)
 SOURCES = [
-    "https://github.com/igareck/vpn-configs-for-russia/blob/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile-2.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
-    "https://github.com/igareck/vpn-configs-for-russia/blob/main/WHITE-CIDR-RU-checked.txt"
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
 MAX_PING = 650 
@@ -37,7 +37,6 @@ RU_COUNTRIES = {
 }
 
 def get_ping(host, port, timeout=3.5):
-    # Две попытки для уменьшения N/A
     for _ in range(2):
         try:
             ip = socket.gethostbyname(host)
@@ -89,7 +88,7 @@ def update_repo(content):
     
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
     data = {
-        "message": f"LTE Update (Double-Gist): {time.strftime('%H:%M:%S')}",
+        "message": f"LTE Update (Full Geography): {time.strftime('%H:%M:%S')}",
         "content": encoded_content,
         "branch": "main"
     }
@@ -103,6 +102,7 @@ def run_once():
             try:
                 r = requests.get(src, timeout=15)
                 if r.status_code == 200:
+                    # Ищем все протоколы
                     keys = re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text)
                     all_raw_keys.extend(keys)
             except: continue
@@ -138,7 +138,7 @@ def run_once():
         )
         
         update_repo(header + "\n".join(final_list))
-        print(f"Успешно! Добавлено {len(final_list)} серверов.")
+        print(f"Успешно! Собрано {len(final_list)} серверов из всех стран.")
         
     except Exception as e:
         print(f"Ошибка: {e}")
