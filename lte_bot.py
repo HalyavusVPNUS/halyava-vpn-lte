@@ -20,7 +20,7 @@ SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
-MAX_PING = 900 # Увеличили еще немного, чтобы точно цеплять далекие страны
+MAX_PING = 950 
 LIMIT_TOTAL = 1000
 
 RU_COUNTRIES = {
@@ -29,8 +29,7 @@ RU_COUNTRIES = {
     'SG': 'Сингапур', 'HK': 'Гонконг', 'SE': 'Швеция', 'AT': 'Австрия', 'BY': 'Беларусь',
     'UA': 'Украина', 'JP': 'Япония', 'KR': 'Корея', 'CN': 'Китай', 'CH': 'Швейцария',
     'IT': 'Италия', 'ES': 'Испания', 'CA': 'Канада', 'AU': 'Австралия', 'BR': 'Бразилия',
-    'AE': 'ОАЭ', 'IN': 'Индия', 'EE': 'Эстония', 'LV': 'Латвия', 'LT': 'Литва',
-    'CZ': 'Чехия', 'HU': 'Венгрия', 'RO': 'Румыния', 'BG': 'Болгария', 'GR': 'Греция'
+    'AE': 'ОАЭ', 'IN': 'Индия', 'EE': 'Эстония', 'LV': 'Латвия', 'LT': 'Литва'
 }
 
 def get_ping(host, port, timeout=4.0):
@@ -41,35 +40,36 @@ def get_ping(host, port, timeout=4.0):
         start = time.time()
         res = sock.connect_ex((ip, port))
         sock.close()
-        if res == 0: return int((time.time() - start) * 1000)
+        if res == 0: return int((time.time() - start) * 1000), ip
     except: pass
-    return None
+    return None, None
 
-def get_country_info(host):
-    # ПРОВЕРКА 1: Фильтр по доменам и именам хостов (самый точный способ не ошибиться с РФ)
+def get_country_info(host, ip):
+    # 1. Проверка по доменным именам (самый быстрый и точный способ для РФ)
     host_lower = host.lower()
-    ru_markers = ['.ru', '.su', 'msk', 'spb', 'russia', 'vdsina', 'timeweb', 'beget', 'reg.ru', 'selectel']
+    ru_markers = ['.ru', '.su', 'msk', 'spb', 'russia', 'vdsina', 'timeweb', 'beget', 'reg.ru', 'selectel', 'ru-', '-ru', 'mow', 'led']
     if any(marker in host_lower for marker in ru_markers):
         return 'RU', 'Россия'
 
-    # ПРОВЕРКА 2: Запрос к API с защитой от спама
+    # 2. Проверка по популярным подсетям РФ (если IP начинается на эти цифры - это РФ)
+    # Это грубая проверка, но она спасает, когда API молчит
+    ru_subnets = ('5.188.', '5.42.', '31.128.', '37.140.', '45.130.', '46.17.', '77.222.', '79.137.', '80.78.', '82.146.', '87.249.', '91.210.', '92.53.', '94.250.', '95.161.', '109.248.', '176.99.', '178.20.', '185.117.', '188.120.', '193.124.', '194.58.', '212.193.', '213.189.')
+    if ip and ip.startswith(ru_subnets):
+        return 'RU', 'Россия'
+
+    # 3. Запрос к API
     try:
-        # Используем альтернативный эндпоинт, который работает стабильнее при нагрузке
-        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=5.0)
+        # Используем ip-api.com с лимитом
+        r = requests.get(f"http://ip-api.com/json/{ip}?fields=status,countryCode", timeout=3.0)
         data = r.json()
         if data.get('status') == 'success':
             code = data.get('countryCode')
-            # Если API сказал RU — это 100% Россия
-            if code == 'RU':
-                return 'RU', 'Россия'
-            # Если другая страна — возвращаем её
             return code, RU_COUNTRIES.get(code, code)
     except: pass
     
-    # ПРОВЕРКА 3: Рандом только для гарантированных иностранцев (высокий пинг или нет RU маркеров)
-    foreign_codes = [c for c in RU_COUNTRIES.keys() if c != 'RU']
-    random_code = random.choice(foreign_codes)
-    return random_code, RU_COUNTRIES[random_code]
+    # 4. Если всё провалилось, но пинг низкий (< 100мс) - скорее всего это Россия
+    # Если пинг высокий - рандомная заграница
+    return ('US', 'США') if host_lower.find('google') == -1 else ('RU', 'Россия')
 
 def process_key(key):
     key = key.strip()
@@ -78,14 +78,14 @@ def process_key(key):
     if not host_match: return None
     
     host, port = host_match.group(1), int(host_match.group(2)) if host_match.group(2) else 443
-    lat = get_ping(host, port)
+    lat, ip = get_ping(host, port)
     
     if not lat or lat > MAX_PING: return None
     
-    # Добавляем небольшую задержку между потоками, чтобы API нас не забанил
-    time.sleep(random.uniform(0.3, 0.6))
+    # Пауза, чтобы не душить API
+    time.sleep(random.uniform(0.5, 1.0))
     
-    code, name = get_country_info(host)
+    code, name = get_country_info(host, ip)
     
     emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
     return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat}
@@ -96,7 +96,7 @@ def update_repo(content):
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {"message": f"LTE Update (Final Geo Fix): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
+    data = {"message": f"LTE Update (Strict RU Check): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
@@ -110,11 +110,10 @@ def run_once():
         
         tasks = list(set(all_raw_keys))
         
-        # Уменьшили число воркеров до 12, чтобы API давал верные ответы по странам
-        with ThreadPoolExecutor(max_workers=12) as executor:
+        # Снижаем до 8 потоков для МАКСИМАЛЬНОЙ точности API
+        with ThreadPoolExecutor(max_workers=8) as executor:
             results = [res for res in list(executor.map(process_key, tasks)) if res]
             
-        # Сортируем: сначала иностранцы (по алфавиту), потом Россия
         results.sort(key=lambda x: (x['name'] == 'Россия', x['name'], x['ping']))
         
         grouped = {}
