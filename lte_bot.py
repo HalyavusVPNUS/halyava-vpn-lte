@@ -12,7 +12,7 @@ REPO_NAME = os.getenv("GH_REPO")
 TOKEN = os.getenv("GH_TOKEN")
 FILE_PATH = "lte.txt"
 
-# ИСПРАВЛЕННЫЕ ССЫЛКИ (теперь RAW, чтобы видел все страны)
+# ИСПРАВЛЕННЫЕ RAW ССЫЛКИ (теперь видит все страны)
 SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile-2.txt",
@@ -20,7 +20,7 @@ SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
-MAX_PING = 650 
+MAX_PING = 1000 
 LIMIT_TOTAL = 1000
 
 # ПОЛНЫЙ СПИСОК СТРАН
@@ -36,7 +36,7 @@ RU_COUNTRIES = {
     'BE': 'Бельгия', 'PT': 'Португалия', 'MD': 'Молдова', 'GE': 'Грузия', 'AM': 'Армения'
 }
 
-def get_ping(host, port, timeout=3.5):
+def get_ping(host, port, timeout=4.0):
     for _ in range(2):
         try:
             ip = socket.gethostbyname(host)
@@ -52,14 +52,16 @@ def get_ping(host, port, timeout=3.5):
     return None
 
 def get_country_info(host):
+    # Пауза, чтобы не ловить блокировку от API (лимит 45 запр/мин)
+    time.sleep(0.4) 
     try:
-        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=4.0)
+        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=5.0)
         data = r.json()
         if data.get('status') == 'success':
             code = data.get('countryCode')
             return code, RU_COUNTRIES.get(code, code)
     except: pass
-    return None, None
+    return "UN", "Unknown"
 
 def process_key(key):
     key = key.strip()
@@ -74,9 +76,8 @@ def process_key(key):
     if not lat or lat > MAX_PING: return None
     
     code, name = get_country_info(host)
-    if not code: return None 
     
-    emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
+    emoji = "".join(chr(127397 + ord(c)) for c in code.upper()) if code != "UN" else "🌐"
     return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat}
 
 def update_repo(content):
@@ -88,7 +89,7 @@ def update_repo(content):
     
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
     data = {
-        "message": f"LTE Update (Full Geography): {time.strftime('%H:%M:%S')}",
+        "message": f"LTE Update (Global Fix): {time.strftime('%H:%M:%S')}",
         "content": encoded_content,
         "branch": "main"
     }
@@ -102,14 +103,14 @@ def run_once():
             try:
                 r = requests.get(src, timeout=15)
                 if r.status_code == 200:
-                    # Ищем все протоколы
                     keys = re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text)
                     all_raw_keys.extend(keys)
             except: continue
         
         tasks = list(set(all_raw_keys))
         
-        with ThreadPoolExecutor(max_workers=35) as executor:
+        # Снизили количество воркеров, чтобы не «душить» API проверки стран
+        with ThreadPoolExecutor(max_workers=25) as executor:
             results = list(executor.map(process_key, tasks))
             
         processed = [res for res in results if res]
@@ -138,7 +139,7 @@ def run_once():
         )
         
         update_repo(header + "\n".join(final_list))
-        print(f"Успешно! Собрано {len(final_list)} серверов из всех стран.")
+        print(f"Успешно! Найдено {len(final_list)} серверов.")
         
     except Exception as e:
         print(f"Ошибка: {e}")
