@@ -4,7 +4,6 @@ import re
 import socket
 import time
 import base64
-import random
 from concurrent.futures import ThreadPoolExecutor
 
 # --- НАСТРОЙКИ ---
@@ -20,7 +19,7 @@ SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
-MAX_PING = 950 
+MAX_PING = 1000 
 LIMIT_TOTAL = 1000
 
 RU_COUNTRIES = {
@@ -32,7 +31,7 @@ RU_COUNTRIES = {
     'AE': 'ОАЭ', 'IN': 'Индия', 'EE': 'Эстония', 'LV': 'Латвия', 'LT': 'Литва'
 }
 
-def get_ping(host, port, timeout=4.0):
+def get_ping(host, port, timeout=3.5):
     try:
         ip = socket.gethostbyname(host)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -44,32 +43,22 @@ def get_ping(host, port, timeout=4.0):
     except: pass
     return None, None
 
-def get_country_info(host, ip):
-    # 1. Проверка по доменным именам (самый быстрый и точный способ для РФ)
-    host_lower = host.lower()
-    ru_markers = ['.ru', '.su', 'msk', 'spb', 'russia', 'vdsina', 'timeweb', 'beget', 'reg.ru', 'selectel', 'ru-', '-ru', 'mow', 'led']
-    if any(marker in host_lower for marker in ru_markers):
-        return 'RU', 'Россия'
-
-    # 2. Проверка по популярным подсетям РФ (если IP начинается на эти цифры - это РФ)
-    # Это грубая проверка, но она спасает, когда API молчит
-    ru_subnets = ('5.188.', '5.42.', '31.128.', '37.140.', '45.130.', '46.17.', '77.222.', '79.137.', '80.78.', '82.146.', '87.249.', '91.210.', '92.53.', '94.250.', '95.161.', '109.248.', '176.99.', '178.20.', '185.117.', '188.120.', '193.124.', '194.58.', '212.193.', '213.189.')
-    if ip and ip.startswith(ru_subnets):
-        return 'RU', 'Россия'
-
-    # 3. Запрос к API
+def get_country(ip):
+    # Попытка №1: ip-api (быстрый)
     try:
-        # Используем ip-api.com с лимитом
-        r = requests.get(f"http://ip-api.com/json/{ip}?fields=status,countryCode", timeout=3.0)
-        data = r.json()
-        if data.get('status') == 'success':
-            code = data.get('countryCode')
-            return code, RU_COUNTRIES.get(code, code)
+        r = requests.get(f"http://ip-api.com/json/{ip}?fields=countryCode", timeout=3.0)
+        code = r.json().get('countryCode')
+        if code: return code
     except: pass
     
-    # 4. Если всё провалилось, но пинг низкий (< 100мс) - скорее всего это Россия
-    # Если пинг высокий - рандомная заграница
-    return ('US', 'США') if host_lower.find('google') == -1 else ('RU', 'Россия')
+    # Попытка №2: ipwhois (запасной)
+    try:
+        r = requests.get(f"https://ipwho.is/{ip}?fields=country_code", timeout=3.0)
+        code = r.json().get('country_code')
+        if code: return code
+    except: pass
+    
+    return "UN"
 
 def process_key(key):
     key = key.strip()
@@ -82,12 +71,16 @@ def process_key(key):
     
     if not lat or lat > MAX_PING: return None
     
-    # Пауза, чтобы не душить API
-    time.sleep(random.uniform(0.5, 1.0))
+    # Сначала быстрая проверка на РФ по хосту
+    code = "RU" if any(m in host.lower() for m in ['.ru', 'msk', 'vdsina', 'beget']) else None
     
-    code, name = get_country_info(host, ip)
+    # Если не РФ по хосту, идем в API
+    if not code:
+        code = get_country(ip)
     
-    emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
+    name = RU_COUNTRIES.get(code, "Иностранец" if code != "RU" else "Россия")
+    emoji = "".join(chr(127397 + ord(c)) for c in code.upper()) if code != "UN" else "🌐"
+    
     return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat}
 
 def update_repo(content):
@@ -96,7 +89,7 @@ def update_repo(content):
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {"message": f"LTE Update (Strict RU Check): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
+    data = {"message": f"LTE Update (Geo Recovery): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
@@ -109,23 +102,20 @@ def run_once():
                 all_raw_keys.extend(re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text))
         
         tasks = list(set(all_raw_keys))
-        
-        # Снижаем до 8 потоков для МАКСИМАЛЬНОЙ точности API
-        with ThreadPoolExecutor(max_workers=8) as executor:
+        # 20 потоков — золотая середина
+        with ThreadPoolExecutor(max_workers=20) as executor:
             results = [res for res in list(executor.map(process_key, tasks)) if res]
             
+        # Сортируем так: Иностранцы ПЕРВЫМИ, потом Россия
         results.sort(key=lambda x: (x['name'] == 'Россия', x['name'], x['ping']))
         
-        grouped = {}
-        for item in results[:LIMIT_TOTAL]:
-            n = item['name']
-            if n not in grouped: grouped[n] = []
-            grouped[n].append(item)
-
         final_list = []
-        for name in sorted(grouped.keys()):
-            for idx, item in enumerate(grouped[name], 1):
-                final_list.append(f"{item['main']}#{item['emoji']} {name} LTE #{idx} | @halyava_vpnx")
+        grouped_counts = {}
+        
+        for item in results[:LIMIT_TOTAL]:
+            name = item['name']
+            grouped_counts[name] = grouped_counts.get(name, 0) + 1
+            final_list.append(f"{item['main']}#{item['emoji']} {name} LTE #{grouped_counts[name]} | @halyava_vpnx")
 
         header = (
             "#profile-title: Халява ВПН | LTE 🏳️\n"
