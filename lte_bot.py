@@ -19,9 +19,9 @@ SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
-MAX_PING = 1000 
+MAX_PING = 800 
 LIMIT_TOTAL = 1000
-MAX_RU_SERVERS = 45  # Лимит на количество русских серверов
+MAX_RU_SERVERS = 45 
 
 RU_COUNTRIES = {
     'RU': 'Россия', 'US': 'США', 'DE': 'Германия', 'NL': 'Нидерланды', 'FI': 'Финляндия',
@@ -30,36 +30,33 @@ RU_COUNTRIES = {
     'UA': 'Украина', 'JP': 'Япония', 'KR': 'Корея', 'CN': 'Китай', 'CH': 'Швейцария',
     'IT': 'Италия', 'ES': 'Испания', 'CA': 'Канада', 'AU': 'Австралия', 'BR': 'Бразилия',
     'AE': 'ОАЭ', 'IN': 'Индия', 'EE': 'Эстония', 'LV': 'Латвия', 'LT': 'Литва',
-    'CZ': 'Чехия', 'HU': 'Венгрия', 'RO': 'Румыния', 'BG': 'Болгария', 'GR': 'Греция',
-    'TW': 'Тайвань', 'CY': 'Кипр', 'TH': 'Таиланд', 'NO': 'Норвегия', 'DK': 'Дания',
-    'BE': 'Бельгия', 'PT': 'Португалия', 'MD': 'Молдова', 'GE': 'Грузия', 'AM': 'Армения'
+    'CZ': 'Чехия', 'HU': 'Венгрия', 'RO': 'Румыния', 'BG': 'Болгария', 'GR': 'Греция'
 }
 
 def get_ping(host, port, timeout=4.0):
-    for _ in range(2):
-        try:
-            ip = socket.gethostbyname(host)
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(timeout)
-            start = time.time()
-            res = sock.connect_ex((ip, port))
-            sock.close()
-            if res == 0:
-                return int((time.time() - start) * 1000)
-        except: pass
-        time.sleep(0.1)
+    try:
+        ip = socket.gethostbyname(host)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(timeout)
+        start = time.time()
+        res = sock.connect_ex((ip, port))
+        sock.close()
+        if res == 0: return int((time.time() - start) * 1000)
+    except: pass
     return None
 
 def get_country_info(host):
-    time.sleep(0.4) 
-    try:
-        r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=5.0)
-        data = r.json()
-        if data.get('status') == 'success':
-            code = data.get('countryCode')
-            return code, RU_COUNTRIES.get(code, code)
-    except: pass
-    return "UN", "Unknown"
+    # Попытка узнать страну через более стабильный API
+    for _ in range(2):
+        try:
+            r = requests.get(f"https://ipwho.is/{host}?fields=success,country_code", timeout=5.0)
+            data = r.json()
+            if data.get('success'):
+                code = data.get('country_code')
+                return code, RU_COUNTRIES.get(code, code)
+            time.sleep(0.5)
+        except: pass
+    return "UN", "Проверка"
 
 def process_key(key):
     key = key.strip()
@@ -67,12 +64,12 @@ def process_key(key):
     host_match = re.search(r'@([^:/?#\s]+):?(\d+)?', main_part)
     if not host_match: return None
     
-    host = host_match.group(1)
-    port = int(host_match.group(2)) if host_match.group(2) else 443
-    
+    host, port = host_match.group(1), int(host_match.group(2)) if host_match.group(2) else 443
     lat = get_ping(host, port)
     if not lat or lat > MAX_PING: return None
     
+    # Небольшая задержка перед запросом страны, чтобы не забанили
+    time.sleep(0.3)
     code, name = get_country_info(host)
     
     emoji = "".join(chr(127397 + ord(c)) for c in code.upper()) if code != "UN" else "🌐"
@@ -81,16 +78,10 @@ def process_key(key):
 def update_repo(content):
     url = f"https://api.github.com/repos/{GITHUB_USER}/{REPO_NAME}/contents/{FILE_PATH}"
     headers = {"Authorization": f"token {TOKEN}", "Accept": "application/vnd.github.v3+json"}
-    
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
-    
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {
-        "message": f"LTE Update (Limit RU 45): {time.strftime('%H:%M:%S')}",
-        "content": encoded_content,
-        "branch": "main"
-    }
+    data = {"message": f"LTE Fix: {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
@@ -98,50 +89,39 @@ def run_once():
     try:
         all_raw_keys = []
         for src in SOURCES:
-            try:
-                r = requests.get(src, timeout=15)
-                if r.status_code == 200:
-                    keys = re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text)
-                    all_raw_keys.extend(keys)
-            except: continue
+            r = requests.get(src, timeout=15)
+            if r.status_code == 200:
+                all_raw_keys.extend(re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text))
         
         tasks = list(set(all_raw_keys))
-        
-        with ThreadPoolExecutor(max_workers=25) as executor:
-            results = list(executor.map(process_key, tasks))
+        # Снижаем до 15 потоков, чтобы API успевал отвечать всем
+        with ThreadPoolExecutor(max_workers=15) as executor:
+            results = [res for res in list(executor.map(process_key, tasks)) if res]
             
-        processed = [res for res in results if res]
-        # Сортируем все по пингу, чтобы сначала шли самые быстрые
-        processed.sort(key=lambda x: x['ping'])
+        results.sort(key=lambda x: x['ping'])
         
-        ru_list = []
-        other_list = []
+        ru_count = 0
+        final_processed = []
         
-        # Распределяем на Россию и остальных
-        for item in processed:
+        for item in results:
             if item['code'] == 'RU':
-                if len(ru_list) < MAX_RU_SERVERS:
-                    ru_list.append(item)
+                if ru_count < MAX_RU_SERVERS:
+                    final_processed.append(item)
+                    ru_count += 1
             else:
-                other_list.append(item)
+                # Все иностранцы и "Проверка" идут без очереди
+                final_processed.append(item)
 
-        # Собираем финальный массив (сначала РФ, потом все остальные страны)
-        final_processed = ru_list + other_list
-        
         grouped = {}
-        for item in final_processed:
+        for item in final_processed[:LIMIT_TOTAL]:
             n = item['name']
             if n not in grouped: grouped[n] = []
             grouped[n].append(item)
 
         final_list = []
-        count = 0
-        # Сортируем страны по алфавиту для красоты
         for name in sorted(grouped.keys()):
             for idx, item in enumerate(grouped[name], 1):
-                if count >= LIMIT_TOTAL: break
                 final_list.append(f"{item['main']}#{item['emoji']} {name} LTE #{idx} | @halyava_vpnx")
-                count += 1
 
         header = (
             "#profile-title: Халява ВПН | LTE 🏳️\n"
@@ -150,10 +130,7 @@ def run_once():
             "#profile-web-page-url: https://t.me/halyava_vpnx\n"
             f"#announce: LTE Обновлено! Найдено {len(final_list)} мощных конфигов :) @halyava_vpnx\n\n\n"
         )
-        
         update_repo(header + "\n".join(final_list))
-        print(f"Успешно! РФ: {len(ru_list)}, Другие: {len(other_list)}.")
-        
     except Exception as e:
         print(f"Ошибка: {e}")
 
