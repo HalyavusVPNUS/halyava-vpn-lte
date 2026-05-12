@@ -12,7 +12,6 @@ REPO_NAME = os.getenv("GH_REPO")
 TOKEN = os.getenv("GH_TOKEN")
 FILE_PATH = "lte.txt"
 
-# ИСПРАВЛЕННЫЕ RAW ССЫЛКИ (теперь видит все страны)
 SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/Vless-Reality-White-Lists-Rus-Mobile.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile-2.txt",
@@ -22,8 +21,8 @@ SOURCES = [
 
 MAX_PING = 1000 
 LIMIT_TOTAL = 1000
+MAX_RU_SERVERS = 45  # Лимит на количество русских серверов
 
-# ПОЛНЫЙ СПИСОК СТРАН
 RU_COUNTRIES = {
     'RU': 'Россия', 'US': 'США', 'DE': 'Германия', 'NL': 'Нидерланды', 'FI': 'Финляндия',
     'TR': 'Турция', 'KZ': 'Казахстан', 'FR': 'Франция', 'GB': 'Великобритания', 'PL': 'Польша',
@@ -52,7 +51,6 @@ def get_ping(host, port, timeout=4.0):
     return None
 
 def get_country_info(host):
-    # Пауза, чтобы не ловить блокировку от API (лимит 45 запр/мин)
     time.sleep(0.4) 
     try:
         r = requests.get(f"http://ip-api.com/json/{host}?fields=status,countryCode", timeout=5.0)
@@ -78,7 +76,7 @@ def process_key(key):
     code, name = get_country_info(host)
     
     emoji = "".join(chr(127397 + ord(c)) for c in code.upper()) if code != "UN" else "🌐"
-    return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat}
+    return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat, 'code': code}
 
 def update_repo(content):
     url = f"https://api.github.com/repos/{GITHUB_USER}/{REPO_NAME}/contents/{FILE_PATH}"
@@ -89,7 +87,7 @@ def update_repo(content):
     
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
     data = {
-        "message": f"LTE Update (Global Fix): {time.strftime('%H:%M:%S')}",
+        "message": f"LTE Update (Limit RU 45): {time.strftime('%H:%M:%S')}",
         "content": encoded_content,
         "branch": "main"
     }
@@ -109,21 +107,36 @@ def run_once():
         
         tasks = list(set(all_raw_keys))
         
-        # Снизили количество воркеров, чтобы не «душить» API проверки стран
         with ThreadPoolExecutor(max_workers=25) as executor:
             results = list(executor.map(process_key, tasks))
             
         processed = [res for res in results if res]
-        processed.sort(key=lambda x: (x['name'], x['ping']))
+        # Сортируем все по пингу, чтобы сначала шли самые быстрые
+        processed.sort(key=lambda x: x['ping'])
+        
+        ru_list = []
+        other_list = []
+        
+        # Распределяем на Россию и остальных
+        for item in processed:
+            if item['code'] == 'RU':
+                if len(ru_list) < MAX_RU_SERVERS:
+                    ru_list.append(item)
+            else:
+                other_list.append(item)
+
+        # Собираем финальный массив (сначала РФ, потом все остальные страны)
+        final_processed = ru_list + other_list
         
         grouped = {}
-        for item in processed:
+        for item in final_processed:
             n = item['name']
             if n not in grouped: grouped[n] = []
             grouped[n].append(item)
 
         final_list = []
         count = 0
+        # Сортируем страны по алфавиту для красоты
         for name in sorted(grouped.keys()):
             for idx, item in enumerate(grouped[name], 1):
                 if count >= LIMIT_TOTAL: break
@@ -139,7 +152,7 @@ def run_once():
         )
         
         update_repo(header + "\n".join(final_list))
-        print(f"Успешно! Найдено {len(final_list)} серверов.")
+        print(f"Успешно! РФ: {len(ru_list)}, Другие: {len(other_list)}.")
         
     except Exception as e:
         print(f"Ошибка: {e}")
