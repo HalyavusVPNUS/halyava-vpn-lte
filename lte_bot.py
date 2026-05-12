@@ -127,7 +127,7 @@ def run_once():
         )
 
     header = (
-        "#profile-title: Халява ВПН | LTE 🇷🇺\n"
+        "#profile-title: Халява ВПН | LTE 🏳️\n"
         "#profile-update-interval: 5\n"
         "#subscription-userinfo: expire=5774966400; total=10995116277760; used=0\n"
         "#profile-web-page-url: https://t.me/halyava_vpnx\n"
