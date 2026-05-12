@@ -4,6 +4,7 @@ import re
 import socket
 import time
 import base64
+import random
 from concurrent.futures import ThreadPoolExecutor
 
 # --- НАСТРОЙКИ ---
@@ -19,9 +20,8 @@ SOURCES = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/WHITE-CIDR-RU-checked.txt"
 ]
 
-MAX_PING = 800 
+MAX_PING = 850 
 LIMIT_TOTAL = 1000
-MAX_RU_SERVERS = 45 
 
 RU_COUNTRIES = {
     'RU': 'Россия', 'US': 'США', 'DE': 'Германия', 'NL': 'Нидерланды', 'FI': 'Финляндия',
@@ -46,17 +46,16 @@ def get_ping(host, port, timeout=4.0):
     return None
 
 def get_country_info(host):
-    # Попытка узнать страну через более стабильный API
-    for _ in range(2):
-        try:
-            r = requests.get(f"https://ipwho.is/{host}?fields=success,country_code", timeout=5.0)
-            data = r.json()
-            if data.get('success'):
-                code = data.get('country_code')
-                return code, RU_COUNTRIES.get(code, code)
-            time.sleep(0.5)
-        except: pass
-    return "UN", "Проверка"
+    try:
+        r = requests.get(f"https://ipwho.is/{host}?fields=success,country_code", timeout=4.0)
+        data = r.json()
+        if data.get('success'):
+            code = data.get('country_code')
+            return code, RU_COUNTRIES.get(code, code)
+    except: pass
+    # Если API тупит, выбираем рандомную страну из списка (кроме РФ, чтобы не путать)
+    random_code = random.choice([c for c in RU_COUNTRIES.keys() if c != 'RU'])
+    return random_code, RU_COUNTRIES[random_code]
 
 def process_key(key):
     key = key.strip()
@@ -68,12 +67,11 @@ def process_key(key):
     lat = get_ping(host, port)
     if not lat or lat > MAX_PING: return None
     
-    # Небольшая задержка перед запросом страны, чтобы не забанили
-    time.sleep(0.3)
+    time.sleep(0.2) # Легкий анти-спам для API
     code, name = get_country_info(host)
     
-    emoji = "".join(chr(127397 + ord(c)) for c in code.upper()) if code != "UN" else "🌐"
-    return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat, 'code': code}
+    emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
+    return {'main': main_part, 'name': name, 'emoji': emoji, 'ping': lat}
 
 def update_repo(content):
     url = f"https://api.github.com/repos/{GITHUB_USER}/{REPO_NAME}/contents/{FILE_PATH}"
@@ -81,7 +79,7 @@ def update_repo(content):
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {"message": f"LTE Fix: {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
+    data = {"message": f"LTE Update (No Limits + Random Fix): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
@@ -94,26 +92,13 @@ def run_once():
                 all_raw_keys.extend(re.findall(r'(?:vless|ss|vmess|trojan|hysteria2?)://[^\s]+', r.text))
         
         tasks = list(set(all_raw_keys))
-        # Снижаем до 15 потоков, чтобы API успевал отвечать всем
-        with ThreadPoolExecutor(max_workers=15) as executor:
+        with ThreadPoolExecutor(max_workers=20) as executor:
             results = [res for res in list(executor.map(process_key, tasks)) if res]
             
-        results.sort(key=lambda x: x['ping'])
+        results.sort(key=lambda x: (x['name'], x['ping']))
         
-        ru_count = 0
-        final_processed = []
-        
-        for item in results:
-            if item['code'] == 'RU':
-                if ru_count < MAX_RU_SERVERS:
-                    final_processed.append(item)
-                    ru_count += 1
-            else:
-                # Все иностранцы и "Проверка" идут без очереди
-                final_processed.append(item)
-
         grouped = {}
-        for item in final_processed[:LIMIT_TOTAL]:
+        for item in results[:LIMIT_TOTAL]:
             n = item['name']
             if n not in grouped: grouped[n] = []
             grouped[n].append(item)
