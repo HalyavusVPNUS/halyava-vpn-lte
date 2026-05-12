@@ -47,13 +47,20 @@ def get_ping(host, port, timeout=4.0):
 
 def get_country_info(host):
     try:
+        # Пробуем узнать реальную страну
         r = requests.get(f"https://ipwho.is/{host}?fields=success,country_code", timeout=4.0)
         data = r.json()
         if data.get('success'):
             code = data.get('country_code')
             return code, RU_COUNTRIES.get(code, code)
     except: pass
-    # Если API тупит, выбираем рандомную страну из списка (кроме РФ, чтобы не путать)
+    
+    # Если не удалось узнать страну через API:
+    # Проверяем, не является ли хост типично русским по домену
+    if host.endswith('.ru') or host.endswith('.su'):
+        return 'RU', 'Россия'
+        
+    # Для всех остальных неопределенных ставим рандомную заграницу
     random_code = random.choice([c for c in RU_COUNTRIES.keys() if c != 'RU'])
     return random_code, RU_COUNTRIES[random_code]
 
@@ -67,7 +74,7 @@ def process_key(key):
     lat = get_ping(host, port)
     if not lat or lat > MAX_PING: return None
     
-    time.sleep(0.2) # Легкий анти-спам для API
+    time.sleep(0.2)
     code, name = get_country_info(host)
     
     emoji = "".join(chr(127397 + ord(c)) for c in code.upper())
@@ -79,7 +86,7 @@ def update_repo(content):
     r = requests.get(url, headers=headers)
     sha = r.json().get('sha') if r.status_code == 200 else None
     encoded_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-    data = {"message": f"LTE Update (No Limits + Random Fix): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
+    data = {"message": f"LTE Update (Real RU + Rand Foreign): {time.strftime('%H:%M:%S')}", "content": encoded_content, "branch": "main"}
     if sha: data["sha"] = sha
     requests.put(url, headers=headers, json=data)
 
