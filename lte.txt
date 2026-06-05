@@ -2,20 +2,35 @@
 #profile-update-interval: 5
 #subscription-userinfo: expire=5774966400; total=10995116277760; used=0
 #profile-web-page-url: https://t.me/halyava_vpnx
-#announce: LTE Обновлено! Найдено 14 мощных конфигов :) @halyava_vpnx
+#announce: LTE Обновлено! Найдено 29 мощных конфигов :) @halyava_vpnx
 
 
-vless://13d3d4bc-5e3b-11f1-bd95-ee5f4ed81fa1@155.212.215.179:2087?security=reality&encryption=none&pbk=ythLos6gxS1GOuPPGJ1xUYtSpOySaDM1mu2nzLqIWjc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=vk.ru&sid=a4077e915d0cd15a#🇷🇺 Россия LTE #1 | @halyava_vpnx
-trojan://humanity@216.24.57.7:443?security=tls&sni=www.ignitelimit.com&fp=chrome&insecure=0&allowInsecure=0&type=ws&path=/assignment#🇷🇺 Россия LTE #2 | @halyava_vpnx
-trojan://humanity@216.24.57.7:443/?type=ws&host=www.ignitelimit.com&path=/assignment&security=tls&sni=www.ignitelimit.com#🇷🇺 Россия LTE #3 | @halyava_vpnx
-hysteria2://10550754-cf62-3d3b-ba6a-50be27a275d7@193.53.126.108:443?sni=s463.okgfwbackxyz.xyz#🇷🇺 Россия LTE #4 | @halyava_vpnx
-trojan://humanity@216.24.57.7:443?path=%2Fassignment&security=tls&alpn=http%2F1.1&insecure=1&host=www.calmloud.com&fp=chrome&type=ws&allowInsecure=1&sni=www.calmloud.com#🇷🇺 Россия LTE #5 | @halyava_vpnx
-vless://931729a8-3c20-4841-89a1-f18dc9ce0a6f@82.202.136.163:8443?allowInsecure=0&sni=cdn7-09.vk-cdnvideo.com&fp=chrome&security=tls#🇷🇺 Россия LTE #6 | @halyava_vpnx
-vless://5d8fcd24-9634-4dd7-845c-3dc2d6291942@nid2.pink-perfect.ru:443?security=reality&encryption=none&pbk=DS9mX6cMb5wvwFzga8yN2NLbs7soXM7038_P23yPKwk&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=nid2.pink-perfect.ru&sid=8ffa160e608bf539#🇷🇺 Россия LTE #7 | @halyava_vpnx
-hysteria2://05d79f12-6a07-47ce-a566-5d5f571b8c59@103.88.241.133:8443?sni=slopllex.app&insecure=0&allowInsecure=0#🇷🇺 Россия LTE #8 | @halyava_vpnx
-hysteria2://10550754-cf62-3d3b-ba6a-50be27a275d7@193.53.126.108:443?insecure=0&alpn=h3&fp=&sni=s463.okgfwbackxyz.xyz#🇷🇺 Россия LTE #9 | @halyava_vpnx
-vless://fc965ad9-bdd7-4815-ad71-b39ec5972dc1@216.24.57.7:443?encryption=none&fp=chrome&host=octopusss4.com&path=%2Ftsghdws&security=tls&sni=octopusss4.com&type=ws#🇷🇺 Россия LTE #10 | @halyava_vpnx
-trojan://humanity@216.24.57.7:443?type=ws&security=tls&path=%2Fassignment&sni=www.calmloud.com&fp=chrome&alpn=http%252F1.1&allowInsecure=1#🇷🇺 Россия LTE #11 | @halyava_vpnx
+vless://9cab10a8-7936-457f-bf1f-b9842439f494@84.201.170.238:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=wh5.vpnburger.ru&pbk=QmwOXqJikZ9gbYtQiuwEt2SAn1U1KtaHHJa5vXemqFM&sid=3fa234ea9feaa048#🇷🇺 Россия LTE #1 | @halyava_vpnx
+vless://cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4@89.208.208.92:9443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=loadtest.dev.urent.ru&pbk=aVu6XB9_RKR1xLtusyQ1_YOWCs4Ofi9GEJd6oERNH2Q&sid=689def22fcb54e86#🇷🇺 Россия LTE #2 | @halyava_vpnx
+vless://f1a44ae4-20f9-4dd7-b60e-b4f2acecfdb4@l11.l-itx.info:2053?type=ws&headerType=none&security=tls&encryption=none&sni=itx-server.digital&fp=firefox&path=%2Fws&host=itx-server.digital&insecure=0#🇷🇺 Россия LTE #3 | @halyava_vpnx
+hysteria2://05d79f12-6a07-47ce-a566-5d5f571b8c59@103.88.241.133:8443?headerType=none&encryption=none&sni=slopllex.app&insecure=0#🇷🇺 Россия LTE #4 | @halyava_vpnx
+vless://cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4@89.208.208.92:7443?encryption=none&type=grpc&security=reality&mode=gun&serviceName=grpc&fp=chrome&sni=loadtest.dev.urent.ru&pbk=_AXs-QnufIq918tbb2pwM3MDbe7kQ6i0cIHDMLwPmGs&sid=3210e0eee6605048#🇷🇺 Россия LTE #5 | @halyava_vpnx
+hysteria2://05d79f12-6a07-47ce-a566-5d5f571b8c59@103.88.241.133:8443?sni=slopllex.app&insecure=0&allowInsecure=0#🇷🇺 Россия LTE #6 | @halyava_vpnx
+vless://17451fec-af94-4715-8c2f-7f6839130d0a@85.193.87.63:2040?encryption=none&type=tcp&security=reality&fp=chrome&sni=tradingview.com&pbk=LidllyozUeeSbuzJ0ZfieGoy8YjVzqXX9H2m9whPaG0&sid=53197c66aef53c44#🇷🇺 Россия LTE #7 | @halyava_vpnx
+vless://ec8f4480-f44e-456b-80b8-ad6ec3e15bfc@45.15.147.103:443?type=tcp&headerType=none&security=reality&encryption=none&sni=account.habr.com&fp=firefox&pbk=g2LPfUD291KVMSN1lhAC1HSmKaAh3hQfnKozJ1enMV4&sid=65fc6512eee9a84a&flow=xtls-rprx-vision#🇷🇺 Россия LTE #8 | @halyava_vpnx
+vless://931729a8-3c20-4841-89a1-f18dc9ce0a6f@82.202.156.143:8443?encryption=none&type=tcp&security=tls&sni=cdn7-09.vk-cdnvideo.com#🇷🇺 Россия LTE #9 | @halyava_vpnx
+vless://91427003-38cb-473e-95f2-a4b500c91f7b@51.250.43.93:443?type=tcp&headerType=none&security=reality&encryption=none&sni=ads.x5.ru&fp=chrome&pbk=MXpxhnU1ctGMXbGGjIrtDfjRX-BbbpsjnS4-SUv3OFs&flow=xtls-rprx-vision#🇷🇺 Россия LTE #10 | @halyava_vpnx
+vless://db95b766-43a8-001f-9b5d-5ca6f2735188@ru02.goodmaximum.com:443?encryption=none&type=tcp&security=reality&headerType=none&sni=ru-cloud.221131513.xyz&fp=chrome&allowInsecure=1&pbk=fPSR5GZpxhOV6Rh7VzMtS4AeRN7ipyNX4waG9JzJzxQ&sid=77778028b56c8704#🇷🇺 Россия LTE #11 | @halyava_vpnx
 trojan://humanity@212.183.88.136:443?path=/assignment&security=tls&insecure=0&host=www.calmlunch.com&type=ws&allowInsecure=0&sni=www.calmlunch.com#🇷🇺 Россия LTE #12 | @halyava_vpnx
 vless://fc965ad9-bdd7-4815-ad71-b39ec5972dc1@216.24.57.7:443?path=%2Ftsghdws&security=tls&encryption=none&insecure=1&host=octopusss4.com&type=ws&allowInsecure=1&sni=octopusss4.com#🇷🇺 Россия LTE #13 | @halyava_vpnx
-hysteria2://10550754-cf62-3d3b-ba6a-50be27a275d7@193.53.126.108:443?sni=s463.okgfwbackxyz.xyz&insecure=1#🇷🇺 Россия LTE #14 | @halyava_vpnx
+vless://73d75a84-7c29-001f-92ca-cc2fd46c254c@ru02.goodmaximum.com:443?type=tcp&security=reality&sni=ru-cloud.221131513.xyz&pbk=fPSR5GZpxhOV6Rh7VzMtS4AeRN7ipyNX4waG9JzJzxQ&sid=77778028b56c8704&fp=chrome&encryption=none#🇷🇺 Россия LTE #14 | @halyava_vpnx
+hysteria2://10550754-cf62-3d3b-ba6a-50be27a275d7@193.53.126.108:443?sni=s463.okgfwbackxyz.xyz&insecure=1#🇷🇺 Россия LTE #15 | @halyava_vpnx
+trojan://humanity@216.24.57.7:443?path=%2Fassignment&security=tls&alpn=http%2F1.1&insecure=1&host=www.calmloud.com&fp=chrome&type=ws&allowInsecure=1&sni=www.calmloud.com#🇷🇺 Россия LTE #16 | @halyava_vpnx
+vless://6525f506-56b0-0006-a77d-52676645c8da@62.152.56.142:443?type=tcp&headerType=none&security=reality&encryption=none&sni=gateway-dppb.x5.ru&fp=firefox&pbk=akCWFrGBboGajZT5HS4m5fw32uJsdw6esUTC1qN4LR0&sid=79ed76c157977111&flow=xtls-rprx-vision#🇷🇺 Россия LTE #17 | @halyava_vpnx
+vless://f1a44ae4-20f9-4dd7-b60e-b4f2acecfdb4@l13.l-itx.info:7443?mode=gun&security=reality&encryption=none&authority=&pbk=F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA&fp=firefox&allowinsecure=0&type=grpc&serviceName=xyz&sni=colorlib.com#🇷🇺 Россия LTE #18 | @halyava_vpnx
+vless://7283d2d5-7b14-431b-9d1f-96f2dac4a97b@83.229.14.125:13569?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&sni=business.vk.ru&pbk=Xl6notHrxamdPvx0cZGGPRQOT-PR1rkjryRazI9i1VI#🇷🇺 Россия LTE #19 | @halyava_vpnx
+trojan://humanity@216.24.57.7:443/?type=ws&host=www.ignitelimit.com&path=/assignment&security=tls&sni=www.ignitelimit.com#🇷🇺 Россия LTE #20 | @halyava_vpnx
+vless://9cab10a8-7936-457f-bf1f-b9842439f494@wh5.vpnburger.ru:443?type=tcp&headerType=none&security=reality&encryption=none&sni=wh5.vpnburger.ru&fp=chrome&pbk=QmwOXqJikZ9gbYtQiuwEt2SAn1U1KtaHHJa5vXemqFM&sid=3fa234ea9feaa048&flow=xtls-rprx-vision#🇷🇺 Россия LTE #21 | @halyava_vpnx
+vless://73d75a84-7c29-001e-92ca-cc2fd46c254c@ru01.goodmaximum.com:443?type=tcp&security=reality&sni=ru-cloud.221131513.xyz&pbk=fPSR5GZpxhOV6Rh7VzMtS4AeRN7ipyNX4waG9JzJzxQ&sid=31181028b56c8704&fp=chrome&encryption=none#🇷🇺 Россия LTE #22 | @halyava_vpnx
+trojan://humanity@216.24.57.7:443?security=tls&sni=www.ignitelimit.com&fp=chrome&insecure=0&allowInsecure=0&type=ws&path=/assignment#🇷🇺 Россия LTE #23 | @halyava_vpnx
+vless://73d75a84-7c29-0024-92ca-cc2fd46c254c@ru01.goodmaximum.com:443?type=tcp&security=reality&sni=ru-cloud.221131513.xyz&pbk=fPSR5GZpxhOV6Rh7VzMtS4AeRN7ipyNX4waG9JzJzxQ&sid=31181028b56c8704&fp=chrome&encryption=none#🇷🇺 Россия LTE #24 | @halyava_vpnx
+vless://fc965ad9-bdd7-4815-ad71-b39ec5972dc1@216.24.57.7:443?encryption=none&fp=chrome&host=octopusss4.com&path=%2Ftsghdws&security=tls&sni=octopusss4.com&type=ws#🇷🇺 Россия LTE #25 | @halyava_vpnx
+vless://f1a44ae4-20f9-4dd7-b60e-b4f2acecfdb4@l1.l-itx.info:7443?type=grpc&headerType=none&security=reality&encryption=none&sni=colorlib.com&fp=firefox&pbk=F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA&serviceName=xyz#🇷🇺 Россия LTE #26 | @halyava_vpnx
+trojan://humanity@216.24.57.6:443?security=tls&sni=www.calmloud.com&fp=chrome&alpn=http/1.1&type=ws&path=/assignment#🇷🇺 Россия LTE #27 | @halyava_vpnx
+trojan://humanity@216.24.57.6:443?path=/assignment&security=tls&alpn=http/1.1&insecure=1&host=www.calmloud.com&fp=chrome&type=ws&allowInsecure=1&sni=www.calmloud.com#🇷🇺 Россия LTE #28 | @halyava_vpnx
+vless://9b651a79-83f8-49a0-9848-b18c6a9406f7@ru-2.videoproeditor.com:443?type=tcp&headerType=none&security=reality&encryption=none&sni=ru-2.videoproeditor.com&fp=randomized&pbk=ivgTfLR13A6xBsicIA28OPoav2tXlsstTTmGuETfnSk&sid=6d6f13013d3e1d0c&flow=xtls-rprx-vision#🇷🇺 Россия LTE #29 | @halyava_vpnx
