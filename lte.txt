@@ -2,6 +2,18 @@
 #profile-update-interval: 5
 #subscription-userinfo: expire=5774966400; total=10995116277760; used=0
 #profile-web-page-url: https://t.me/halyava_vpnx
-#announce: LTE Обновлено! Найдено 0 мощных конфигов :) @halyava_vpnx
+#announce: LTE Обновлено! Найдено 12 мощных конфигов :) @halyava_vpnx
 
 
+vless://ec2aaf4f-b1aa-4410-4b14-d4b4e9b5daf4@213.219.212.39:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=qq&sni=eh.vk.ru&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk#🇷🇺 Россия LTE #1 | @halyava_vpnx
+vless://1d0e7edd-2d78-0003-8ded-573c2935a696@wl-cdn2.coconutstrip.co:443?security=reality&encryption=none&pbk=7a0xjAoeGvlHx-Vy-JC-nr_eKQhQyFUDL16M85Z-Zzo&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=wl-cdn2.coconutstrip.co&sid=15affa0af66dfc79#🇷🇺 Россия LTE #2 | @halyava_vpnx
+vless://ca428a2e-7f82-4030-851b-cab731a5645a@l12.l-itx.info:443?fp=firefox&host=yandex.by&mode=stream-up&path=%2Fxh&pbk=F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA&security=reality&sni=yandex.by&type=xhttp#🇷🇺 Россия LTE #3 | @halyava_vpnx
+vless://ca428a2e-7f82-4030-851b-cab731a5645a@157.22.241.100:443?fp=firefox&mode=stream-up&path=%2Fxh&pbk=F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA&security=reality&sni=yandex.by&type=xhttp#🇷🇺 Россия LTE #4 | @halyava_vpnx
+vless://3c533416-8852-4f1a-befa-23289b2f32d1@212.193.153.170:443?encryption=none&type=ws&security=tls&path=%2Fv1%2Fdata%2Fsync%2F&host=s86255.cdn.ngenix.net&fp=chrome&sni=s86255.cdn.ngenix.net&alpn=http%2F1.1#🇷🇺 Россия LTE #5 | @halyava_vpnx
+vless://449a4ff7-9eb7-41c1-9a1f-64579a609663@87.239.135.8:443?type=tcp&headerType=none&security=reality&encryption=none&sni=md-kiv-2.blook.network&fp=firefox&pbk=SqYAVrG01Mk0KXzlkmckO6lxvv6iZBJJvxE6PvD2vD0&sid=3c2f8f52&flow=xtls-rprx-vision#🇷🇺 Россия LTE #6 | @halyava_vpnx
+vless://ca428a2e-7f82-4030-851b-cab731a5645a@157.22.241.100:443?fp=firefox&host=yandex.by&mode=stream-up&path=%2Fxh&pbk=F2MKDw5CCtP1oXIej2EgNxB01k3eyNu7tKCFfucgnRA&security=reality&sni=yandex.by&type=xhttp#🇷🇺 Россия LTE #7 | @halyava_vpnx
+vless://d58fba68-1610-41dd-a823-12caf6e0dbed@89.144.10.158:2053?encryption=none&extra=%7B%22scMaxEachPostBytes%22%3A%221000000%22%2C%22scMinPostsIntervalMs%22%3A%2230%22%2C%22xPaddingBytes%22%3A%22100-1000%22%7D&fp=chrome&host=&mode=auto&path=%2F&pbk=AsmltIw-2fVcbpcbckmIJZrWiVyDW_Kid8VIvHkcmC4&security=reality&sid=c5b9a9b22fcfec5b&sni=www.yahoo.com&spx=%2FViTuhxDNSUJl7qn&type=xhttp&x_padding_bytes=100-1000#🇷🇺 Россия LTE #8 | @halyava_vpnx
+vless://3d3d0e4d-e02b-40e4-941c-c0153b39f6e7@51.250.106.87:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=safari&sni=cdp.x5.ru&pbk=wgXD4k3A16WR0aL63N9Mx8xoqFigJLyQWJXi-l3MPXI&sid=8ec792bfd725be8a#🇷🇺 Россия LTE #9 | @halyava_vpnx
+vless://b6072b2d-f178-471b-8fdf-4092f4bad760@51.250.106.87:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=safari&sni=cdp.x5.ru&pbk=wgXD4k3A16WR0aL63N9Mx8xoqFigJLyQWJXi-l3MPXI&sid=8ec792bfd725be8a#🇷🇺 Россия LTE #10 | @halyava_vpnx
+vless://3c533416-8852-4f1a-befa-23289b2f32d1@212.193.152.65:443?encryption=none&type=ws&security=tls&path=%2Fv1%2Fdata%2Fsync%2F&host=s86255.cdn.ngenix.net&fp=chrome&sni=s86255.cdn.ngenix.net#🇷🇺 Россия LTE #11 | @halyava_vpnx
+vless://f1a44ae4-20f9-4dd7-b60e-b4f2acecfdb4@157.22.241.100:2053?encryption=none&type=ws&security=tls&path=%2Fws&host=itx-server.digital&fp=firefox&sni=554dad6ab34f7baf.itx-server.digital#🇷🇺 Россия LTE #12 | @halyava_vpnx
