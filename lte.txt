@@ -2,23 +2,22 @@
 #profile-update-interval: 5
 #subscription-userinfo: expire=5774966400; total=10995116277760; used=0
 #profile-web-page-url: https://t.me/halyava_vpnx
-#announce: LTE Обновлено! Найдено 17 мощных конфигов :) @halyava_vpnx
+#announce: LTE Обновлено! Найдено 16 мощных конфигов :) @halyava_vpnx
 
 
-hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@193.142.59.97:443?headerType=none&encryption=none&sni=u711540us1244.csgfw.top&insecure=0#🇷🇺 Россия LTE #1 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=gun&serviceName=multi&fp=edge&sni=cuisine.mikata.ru&alpn=h3#🇷🇺 Россия LTE #2 | @halyava_vpnx
-vless://c8a8dcf1-18aa-40e6-97d5-5dae9912e51b@65.109.217.246:2026?security=reality&encryption=none&pbk=yt2kyF7DABbLCwB49Hd3VuNu7-QN57GiLoeiD5vVg30&headerType=&fp=random&spx=%2F5cBtjCFJhS4y8nB&type=tcp&flow=xtls-rprx-vision&sni=www.oracle.com&sid=7d#🇷🇺 Россия LTE #3 | @halyava_vpnx
-vless://2dacceea-8664-4fed-ba16-27fdd3b40f3e@s6.meoshop.ir:2053?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&extra={"xPaddingBytes":"100-1000"}&insecure=0&host=baba.meoshop.ir&fp=chrome&type=xhttp&allowInsecure=0&sni=baba.meoshop.ir#🇷🇺 Россия LTE #4 | @halyava_vpnx
-vless://2dacceea-8664-4fed-ba16-27fdd3b40f3e@s8.meoshop.ir:2053?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&extra={"xPaddingBytes":"100-1000"}&insecure=0&host=baba.meoshop.ir&fp=chrome&type=xhttp&allowInsecure=0&sni=baba.meoshop.ir#🇷🇺 Россия LTE #5 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?type=grpc&security=tls&fp=edge&sni=cuisine.mikata.ru&serviceName=multi#🇷🇺 Россия LTE #6 | @halyava_vpnx
-hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@193.142.59.97:443?sni=u711540us1244.csgfw.top#🇷🇺 Россия LTE #7 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=gun&serviceName=multi&sni=cuisine.mikata.ru#🇷🇺 Россия LTE #8 | @halyava_vpnx
-vless://2dacceea-8664-4fed-ba16-27fdd3b40f3e@s7.meoshop.ir:2053?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&extra={"xPaddingBytes":"100-1000"}&insecure=0&host=baba.meoshop.ir&fp=chrome&type=xhttp&allowInsecure=0&sni=baba.meoshop.ir#🇷🇺 Россия LTE #9 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?allowInsecure=1&type=grpc&security=tls&fp=edge&sni=cuisine.mikata.ru&mode=multi&serviceName=multi#🇷🇺 Россия LTE #10 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=multi&serviceName=multi&fp=edge&sni=cuisine.mikata.ru&alpn=h3#🇷🇺 Россия LTE #11 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?type=grpc&headerType=none&security=tls&encryption=none&sni=cuisine.mikata.ru&fp=edge&alpn=h3&serviceName=multi&insecure=0#🇷🇺 Россия LTE #12 | @halyava_vpnx
-hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@212.192.15.58:443?sni=u711540us306.wagahaha.xyz&alpn=h3&mport=30000-32000&hopinterval=30s#🇷🇺 Россия LTE #13 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?type=grpc&security=tls&fp=firefox&sni=cuisine.mikata.ru&serviceName=multi#🇷🇺 Россия LTE #14 | @halyava_vpnx
-hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@193.142.59.97:443?insecure=1&sni=u711540us1244.csgfw.top#🇷🇺 Россия LTE #15 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=multi&serviceName=multi&fp=edge&sni=cuisine.mikata.ru#🇷🇺 Россия LTE #16 | @halyava_vpnx
-vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?allowInsecure=1&insecure=1&mode=multi&type=grpc&security=tls&sni=cuisine.mikata.ru&fp=edge&alpn=h3&serviceName=multi#🇷🇺 Россия LTE #17 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?type=grpc&headerType=none&security=tls&encryption=none&sni=cuisine.mikata.ru&fp=edge&alpn=h3&serviceName=multi&insecure=0#🇷🇺 Россия LTE #1 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?type=grpc&security=tls&fp=edge&sni=cuisine.mikata.ru&serviceName=multi#🇷🇺 Россия LTE #2 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=gun&serviceName=multi&sni=cuisine.mikata.ru#🇷🇺 Россия LTE #3 | @halyava_vpnx
+vless://2dacceea-8664-4fed-ba16-27fdd3b40f3e@s7.meoshop.ir:2053?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&extra={"xPaddingBytes":"100-1000"}&insecure=0&host=baba.meoshop.ir&fp=chrome&type=xhttp&allowInsecure=0&sni=baba.meoshop.ir#🇷🇺 Россия LTE #4 | @halyava_vpnx
+hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@193.142.59.97:443?sni=u711540us1244.csgfw.top#🇷🇺 Россия LTE #5 | @halyava_vpnx
+vless://2dacceea-8664-4fed-ba16-27fdd3b40f3e@s8.meoshop.ir:2053?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&extra={"xPaddingBytes":"100-1000"}&insecure=0&host=baba.meoshop.ir&fp=chrome&type=xhttp&allowInsecure=0&sni=baba.meoshop.ir#🇷🇺 Россия LTE #6 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=multi&serviceName=multi&fp=edge&sni=cuisine.mikata.ru&alpn=h3#🇷🇺 Россия LTE #7 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?type=grpc&security=tls&fp=firefox&sni=cuisine.mikata.ru&serviceName=multi#🇷🇺 Россия LTE #8 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=gun&serviceName=multi&fp=edge&sni=cuisine.mikata.ru&alpn=h3#🇷🇺 Россия LTE #9 | @halyava_vpnx
+hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@193.142.59.97:443?headerType=none&encryption=none&sni=u711540us1244.csgfw.top&insecure=0#🇷🇺 Россия LTE #10 | @halyava_vpnx
+hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@212.192.15.58:443?sni=u711540us306.wagahaha.xyz&alpn=h3&mport=30000-32000&hopinterval=30s#🇷🇺 Россия LTE #11 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?allowInsecure=1&type=grpc&security=tls&fp=edge&sni=cuisine.mikata.ru&mode=multi&serviceName=multi#🇷🇺 Россия LTE #12 | @halyava_vpnx
+vless://2dacceea-8664-4fed-ba16-27fdd3b40f3e@s6.meoshop.ir:2053?mode=auto&path=/&security=tls&alpn=h2,http/1.1&encryption=none&extra={"xPaddingBytes":"100-1000"}&insecure=0&host=baba.meoshop.ir&fp=chrome&type=xhttp&allowInsecure=0&sni=baba.meoshop.ir#🇷🇺 Россия LTE #13 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@95.181.213.5:443?encryption=none&type=grpc&security=tls&mode=multi&serviceName=multi&fp=edge&sni=cuisine.mikata.ru#🇷🇺 Россия LTE #14 | @halyava_vpnx
+vless://9b59bf90-62ae-4f64-8d0e-ec236c260f74@cuisine.mikata.ru:443?allowInsecure=1&insecure=1&mode=multi&type=grpc&security=tls&sni=cuisine.mikata.ru&fp=edge&alpn=h3&serviceName=multi#🇷🇺 Россия LTE #15 | @halyava_vpnx
+hysteria2://43bcba7d-cd22-379c-a7da-2e8eafecbc78@193.142.59.97:443?insecure=1&sni=u711540us1244.csgfw.top#🇷🇺 Россия LTE #16 | @halyava_vpnx
