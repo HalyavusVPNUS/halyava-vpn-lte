@@ -2,26 +2,45 @@
 #profile-update-interval: 5
 #subscription-userinfo: expire=5774966400; total=10995116277760; used=0
 #profile-web-page-url: https://t.me/halyava_vpnx
-#announce: LTE Обновлено! Найдено 20 мощных конфигов :) @halyava_vpnx
+#announce: LTE Обновлено! Найдено 39 мощных конфигов :) @halyava_vpnx
 
 
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443?insecure=0&sni=fta.fontanvpn.com&__rand=025d5f55&seq=you_are_beautiful8692#🇷🇺 Россия LTE #1 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&nonce=LYkhMOrv#🇷🇺 Россия LTE #2 | @halyava_vpnx
-vless://77864cb4-7791-4e01-97ed-0aaf6904389f@193.33.133.189:443?encryption=none&type=xhttp&security=reality&extra=null&fp=firefox&sni=fi1.foxnezia.dev&pbk=Ga_FpKnw8ZXngh86KkciKc7SrKNljVat1_8fkyVWbjY&sid=4fd3840415403f31#🇷🇺 Россия LTE #3 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&nonce=bOEFgE4g#🇷🇺 Россия LTE #4 | @halyava_vpnx
-vless://0ac0a6f0-d3f0-47f1-8de4-ce785e515a5c@91.193.58.77:443?path=%2Fca-cl&security=tls&encryption=none&insecure=0&host=unnes.ac.id.yxls.eu.cc&fp=firefox&type=ws&allowInsecure=0&sni=unnes.ac.id.yxls.eu.cc#🇷🇺 Россия LTE #5 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443?encryption=none&sni=fta.fontanvpn.com&insecure=0&headerType=none&__rand=025d5f55&__rand=d831c313#🇷🇺 Россия LTE #6 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443?burmalda=f3ababc1&insecure=0&__rand=025d5f55&sni=fta.fontanvpn.com&seq=you_are_beautiful6935#🇷🇺 Россия LTE #7 | @halyava_vpnx
-vless://c25d94a5-7ac8-41f1-86f1-512a4098df19@87.228.101.211:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=firefox&sni=max.ru&pbk=kDGigLxn2RUJ8HqhPVUb8pRAcjn5zMhR0-QrORmbIDk&sid=be6abde66d48cd13&spx=%2F#🇷🇺 Россия LTE #8 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&insecure=1&nonce=LYkhMOrv#🇷🇺 Россия LTE #9 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443?sni=fta.fontanvpn.com&insecure=0&burmalda=f3ababc1&__rand=025d5f55&seq=you_are_beautiful6140#🇷🇺 Россия LTE #10 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443/?sni=fta.fontanvpn.com#🇷🇺 Россия LTE #11 | @halyava_vpnx
-vless://0ac0a6f0-d3f0-47f1-8de4-ce785e515a5c@91.193.58.77:443?encryption=none&fp=chrome&host=unnes.ac.id.yxls.eu.cc&path=%2Fca-cl&security=tls&sni=unnes.ac.id.yxls.eu.cc&type=ws#🇷🇺 Россия LTE #12 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443?sni=fta.fontanvpn.com&__rand=025d5f55&_t=ececfc53&descriptions=_95faf3#🇷🇺 Россия LTE #13 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&nonce=zj4i5E80#🇷🇺 Россия LTE #14 | @halyava_vpnx
-vless://c25d94a5-7ac8-41f1-86f1-512a4098df19@87.228.101.211:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=firefox&sni=5post-gate.x5.ru&pbk=kDGigLxn2RUJ8HqhPVUb8pRAcjn5zMhR0-QrORmbIDk&sid=be6abde66d48cd13&spx=%2F#🇷🇺 Россия LTE #15 | @halyava_vpnx
-vless://0ac0a6f0-d3f0-47f1-8de4-ce785e515a5c@91.193.58.77:443?path=/ca-cl&security=tls&encryption=none&insecure=0&host=unnes.ac.id.yxls.eu.cc&type=ws&allowInsecure=0&sni=unnes.ac.id.yxls.eu.cc#🇷🇺 Россия LTE #16 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@fta.fontanvpn.com:443?encryption=none&headerType=none&__rand=025d5f55&sni=fta.fontanvpn.com&insecure=0&__rand=94cf702c#🇷🇺 Россия LTE #17 | @halyava_vpnx
-vless://dba50bb9-2456-4128-8632-f7ba1e6a7ab5@78.41.111.87:443?encryption=none&security=tls&sni=s10211.cdn.ngenix.net&fp=qq&alpn=http/1.1&insecure=0&allowInsecure=0&type=ws&host=s10211.cdn.ngenix.net&path=/api/user#🇷🇺 Россия LTE #18 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&freeinternet=kizyak_vpn1782323570413#🇷🇺 Россия LTE #19 | @halyava_vpnx
-hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&insecure=1&nonce=bOEFgE4g#🇷🇺 Россия LTE #20 | @halyava_vpnx
+vless://083471bf-bbf4-4e1d-8953-912b8d3b6255@82.202.177.144:5269?flow=&fp=qq&pbk=hx1gkWBL2ixtwQSGXEvLT1Yz8GBsCFWriz_WLzLQNHQ&security=reality&sid=4eb166dbed98e63d&sni=max.ru&type=tcp#🇷🇺 Россия LTE #1 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@87.242.110.7:443?encryption=none&security=reality&type=tcp&sni=ai.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #2 | @halyava_vpnx
+vless://2285c587-67f4-4404-bb78-c91e8e4f5338@158.160.94.4:443?security=reality&pbk=fbv5wVdKhLJFpmUQy2Q0ZnKHaQrFIxwkQGQTnMRaFh8&sid=a1&sni=ads.x5.ru%3A443&fp=chrome&flow=xtls-rprx-vision#🇷🇺 Россия LTE #3 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?encryption=none&insecure=0&headerType=none&sni=fta.fontanvpn.com&descriptions=%D0%BB%D1%8E%D0%B1%D0%B8_%D1%81%D0%B5%D0%B1%D1%8F4bf2f6#🇷🇺 Россия LTE #4 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?headerType=none&insecure=0&encryption=none&sni=fta.fontanvpn.com&_t=d1c0cc0c&descriptions=%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%83%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D1%83221#🇷🇺 Россия LTE #5 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&nonce=LYkhMOrv#🇷🇺 Россия LTE #6 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@95.163.211.22:443?encryption=none&security=reality&type=tcp&sni=fi.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #7 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com#🇷🇺 Россия LTE #8 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=0&headerType=none&encryption=none&sni=fta.fontanvpn.com&__rand=21fb77d3#🇷🇺 Россия LTE #9 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&freeinternet=kizyak_vpn1782361810721#🇷🇺 Россия LTE #10 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@193.39.168.154:443?encryption=none&security=reality&type=tcp&sni=gb.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #11 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&nonce=bOEFgE4g#🇷🇺 Россия LTE #12 | @halyava_vpnx
+vless://0ac0a6f0-d3f0-47f1-8de4-ce785e515a5c@91.193.58.77:443?path=%2Fca-cl&security=tls&encryption=none&insecure=0&host=unnes.ac.id.yxls.eu.cc&fp=firefox&type=ws&allowInsecure=0&sni=unnes.ac.id.yxls.eu.cc#🇷🇺 Россия LTE #13 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&insecure=1&nonce=LYkhMOrv#🇷🇺 Россия LTE #14 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?headerType=none&encryption=none&sni=fta.fontanvpn.com&insecure=0&descriptions=%D0%BB%D1%8E%D0%B1%D0%B8_%D1%81%D0%B5%D0%B1%D1%8F1275ab#🇷🇺 Россия LTE #15 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&insecure=1&nonce=bOEFgE4g#🇷🇺 Россия LTE #16 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@95.163.211.206:443?encryption=none&security=reality&type=tcp&sni=at.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #17 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?headerType=none&encryption=none&insecure=0&sni=fta.fontanvpn.com&descriptions=%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%83%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D1%8390#🇷🇺 Россия LTE #18 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&freeinternet=kizyak_vpn1782335316958#🇷🇺 Россия LTE #19 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=0&encryption=none&sni=fta.fontanvpn.com&headerType=none&_t=d1c0cc0c&seq=you_are_beautiful0919#🇷🇺 Россия LTE #20 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&burmalda=f634a43f#🇷🇺 Россия LTE #21 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&descriptions=933#🇷🇺 Россия LTE #22 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@87.242.110.7:443?encryption=none&security=reality&type=tcp&sni=gb.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #23 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&headerType=none&insecure=0&encryption=none&__rand=df80d432#🇷🇺 Россия LTE #24 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&insecure=1&burmalda=f634a43f#🇷🇺 Россия LTE #25 | @halyava_vpnx
+vless://0ac0a6f0-d3f0-47f1-8de4-ce785e515a5c@91.193.58.77:443?path=%2Fca-cl&security=tls&encryption=none&insecure=0&host=unnes.ac.id.yxls.eu.cc&fp=chrome&type=ws&allowInsecure=0&sni=unnes.ac.id.yxls.eu.cc#🇷🇺 Россия LTE #26 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&burmalda=af3b0558#🇷🇺 Россия LTE #27 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&__rand=6a997ca5#🇷🇺 Россия LTE #28 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@95.163.211.22:443?encryption=none&security=reality&type=tcp&sni=ai.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #29 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&descriptions=_c25a3f#🇷🇺 Россия LTE #30 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?headerType=none&encryption=none&sni=fta.fontanvpn.com&insecure=0&burmalda=2c8a8525#🇷🇺 Россия LTE #31 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?encryption=none&insecure=0&sni=fta.fontanvpn.com&headerType=none&descriptions=%D0%BB%D1%8E%D0%B1%D0%B8_%D1%81%D0%B5%D0%B1%D1%8F836610#🇷🇺 Россия LTE #32 | @halyava_vpnx
+vless://0ac0a6f0-d3f0-47f1-8de4-ce785e515a5c@91.193.58.77:443?encryption=none&security=tls&sni=unnes.ac.id.yxls.eu.cc&insecure=0&allowInsecure=0&type=ws&host=unnes.ac.id.yxls.eu.cc&path=%2Fca-cl#🇷🇺 Россия LTE #33 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&freeinternet=kizyak_vpn1782323570413#🇷🇺 Россия LTE #34 | @halyava_vpnx
+vless://8d7032fa-47e2-40b9-86ee-0072b23feff8@158.160.94.4:443?security=reality&pbk=fbv5wVdKhLJFpmUQy2Q0ZnKHaQrFIxwkQGQTnMRaFh8&sid=a1&sni=ads.x5.ru%3A443&fp=chrome&flow=xtls-rprx-vision#🇷🇺 Россия LTE #35 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@95.163.211.17:443?encryption=none&security=reality&type=tcp&sni=fi.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #36 | @halyava_vpnx
+vless://b2b8bd00-2e42-4875-8d7b-bcf97093a1d4@95.163.211.206:443?encryption=none&security=reality&type=tcp&sni=ai.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#🇷🇺 Россия LTE #37 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?sni=fta.fontanvpn.com&nonce=zj4i5E80#🇷🇺 Россия LTE #38 | @halyava_vpnx
+hysteria2://00dcd873-9211-4d61-ad35-87999906e5c8@185.75.135.220:443?insecure=1&sni=fta.fontanvpn.com&descriptions=%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%83%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D1%83933#🇷🇺 Россия LTE #39 | @halyava_vpnx
